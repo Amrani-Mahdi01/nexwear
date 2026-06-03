@@ -167,14 +167,21 @@ export function SiteFooter() {
       {/* ── Bottom bar ── */}
       <div className="mx-auto flex max-w-[110rem] flex-col items-center justify-between gap-3 px-5 py-8 text-[0.7rem] uppercase tracking-[0.18em] text-paper/45 sm:flex-row lg:px-10">
         <span>© 2026 NexWear — All rights reserved</span>
-        <div className="flex gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           <Link href="#" className="transition-colors hover:text-paper">
             Privacy
           </Link>
           <Link href="#" className="transition-colors hover:text-paper">
             Terms
           </Link>
-          <span>Made for the next.</span>
+          <a
+            href="https://dz-ecom.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-paper"
+          >
+            Developed by <span className="text-paper/80">dz-ecom.com</span>
+          </a>
         </div>
       </div>
     </footer>
