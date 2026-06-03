@@ -54,8 +54,8 @@ export function ProductCard({ product }: { product: Product }) {
         </button>
       </div>
 
-      <div className="mt-4 flex items-start justify-between gap-3">
-        <div>
+      <div className="mt-4 flex items-start justify-between gap-2">
+        <div className="min-w-0">
           <h3 className="text-sm font-semibold leading-snug transition-colors group-hover:text-ash">
             {product.name}
           </h3>
@@ -63,10 +63,10 @@ export function ProductCard({ product }: { product: Product }) {
             {product.category}
           </p>
         </div>
-        <div className="shrink-0 text-right text-sm">
+        <div className="flex shrink-0 flex-col items-end text-sm leading-tight">
           <span className="font-semibold">{formatPrice(product.price)}</span>
           {product.oldPrice && (
-            <span className="ml-2 text-ash line-through">
+            <span className="text-ash line-through">
               {formatPrice(product.oldPrice)}
             </span>
           )}

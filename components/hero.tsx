@@ -265,7 +265,7 @@ export function Hero() {
             initial={{ clipPath: "inset(100% 0 0 0)" }}
             animate={{ clipPath: "inset(0% 0 0 0)" }}
             transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
-            className="group relative ml-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2px] bg-smoke lg:max-w-none"
+            className="group relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2px] bg-smoke lg:mx-0 lg:ml-auto lg:max-w-none"
           >
             <AnimatePresence initial={false}>
               <motion.div
