@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-display: var(--ff-display);
+  --font-editorial: var(--ff-editorial);
+  --font-body: var(--ff-body);
+
+  --color-ink: #0a0a0a;
+  --color-paper: #ffffff;
+  --color-smoke: #f4f4f2;
+  --color-ash: #6b6b6b;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--ff-body), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Hide the native scrollbar — dragging it fights Lenis' smoothing and glitches.
+   Wheel / trackpad / touch still scroll via Lenis. Restored for reduced-motion
+   users below (who get native scrolling). */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* Chromium / Safari */
+}
+
+@layer utilities {
+  /* Outlined display text for editorial marquees */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.4px #0a0a0a;
+  }
+  .text-outline-light {
+    color: transparent;
+    -webkit-text-stroke: 1.4px #ffffff;
+  }
+
+  /* Seamless marquee — content is duplicated, track translates -50% */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee var(--marquee-duration, 32s) linear infinite;
+  }
+  .group\/marquee:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+
+  /* Film-grain overlay applied site-wide */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scrollbar-width: auto;
+    -ms-overflow-style: auto;
+  }
+  html::-webkit-scrollbar {
+    width: auto;
+    height: auto;
+    display: block;
+  }
+  .animate-marquee {
+    animation: none;
+  }
 }
